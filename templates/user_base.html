@@ -4,7 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 	<title>
-    	GAINS - {% block title %}{% endblock %}
+    	Bloggers Space - {% block title %}{% endblock %}
     	{% if request.user.is_authenticated and request.user.is_user %}
 		   Name:&nbsp;{{request.user.salutation}}&nbsp;{{request.user.first_name}}&nbsp;{{request.user.middle_name}}&nbsp;{{request.user.last_name}},&nbsp;{{request.user.designation}}
 		{% endif %}
