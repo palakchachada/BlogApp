@@ -1,0 +1,332 @@
+
+{% extends "base.html" %} 
+{% load static %}
+{% block title %} Users {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+     <!-- Include Flatpickr CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+    <!-- <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Add some styles for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style> -->
+
+      <!-- old -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 5px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 3px solid lightgrey; /* Increase border width */
+            padding: 20px; /* Add padding for spacing inside the border */
+            border-radius: 8px; /* Optional: Add rounded corners */
+            width: 70%; /* Set a specific width */
+            margin: 0 auto; /* Center the form horizontally */
+            margin-top: 20px; /* Optional: Add margin at the top */
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, textarea, button[type="button"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        /* Styling for the form button */
+        button[type="button"] {
+            background-color: #45a049;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="button"]:hover {
+            background-color: #4CAF50;
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- <h1>Blog Management</h1> -->
+<div class="page-wrapper">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-bar" style="background-color: #333;">
+        <div class="container">
+            <div class="row align-items-center inner-banner">
+                <div class="col-md-12 col-12 text-center">
+                    <h2 class="breadcrumb-title">Edit Blog</h2>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <form id="blogForm" method="POST" class="form" autocomplete="on" style="margin-top: 10px;">
+            {% csrf_token %}
+
+        <label for="title">Blog Title:</label>
+        <input type="text" value="{{q.title}}" name="title" required>
+        <br>
+
+        <label for="content">Blog Content:</label>
+        <textarea  name="content" rows="4" required>{{q.content}}</textarea>
+        <br>
+
+        
+
+        <input type="submit" style="background-color: #45a049; color: #fff;width: fit-content;" value="Save"></button>
+        <!-- <input type="submit" style="background-color: #00569d; color: #fff; margin-right: 10px;" class="btn" value="Save" id="saveButton"> -->
+    </form>
+  </div>
+
+</div>
+
+
+
+
+<!-- Display added blogs in a table -->
+<!-- <table id="blogTable" class="display table table-hover">
+    <thead>
+        <tr>
+            <th style="width: 5%">SR.NO</th>
+            <th style="width: 5%">Title</th>
+            <th style="width: 5%">Content</th>
+            <th style="width: 5%">Date</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+       
+                    
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ q.title}}</td>
+                      <td>{{ q.content }}</td>
+                      <td>{{ q.date }}</td>
+                    </tr>
+    </tbody>
+</table> -->
+<br><br>
+<script>
+    function openModal() {
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+    
+    
+
+    function addBlog() {
+        // Get form values
+        var title = document.getElementById("title").value;
+        var content = document.getElementById("content").value;
+        var date = document.getElementById("date").value;
+
+        // Validate form data
+        if (!title || !content || !date) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        // Add a new row to the table
+        var table = document.getElementById("blogTable").getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow(table.rows.length);
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+
+        cell1.innerHTML = title;
+        cell2.innerHTML = content;
+        cell3.innerHTML = date;
+        cell4.innerHTML = '<button type="button" onclick="deleteBlog(this)">Delete</button>';
+        
+        // Clear the form
+        document.getElementById("title").value = "";
+        document.getElementById("content").value = "";
+        document.getElementById("date").value = "";
+
+        // Close the modal
+        closeModal();
+    }
+
+    // function deleteBlog(button) {
+    //     // Delete the row containing the delete button
+    //     var row = button.parentNode.parentNode;
+    //     row.parentNode.removeChild(row);
+    // }
+</script>
+
+<script src="{% static 'assets/js/jquery-3.6.4.min.js' %}"></script>
+<script> 
+			flatpickr("#date", {
+			  dateFormat: "d-m-Y",
+			  altInput: true,
+			  altFormat: "d-m-Y",
+			  allowInput: false,
+              defaultDate: "today"  // Set default date to today
+			});
+		  
+</script> 
+
+</body>
+</html>
+{% endblock content %}
